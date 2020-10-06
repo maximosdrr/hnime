@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Episode } from './episode.entity';
+import { Movie } from './movie.entity';
 
 @Entity()
 export class Anime {
@@ -59,4 +60,10 @@ export class Anime {
     episode => episode.anime,
   )
   episodes: Episode[];
+
+  @OneToMany(
+    type => Movie,
+    movies => movies.anime,
+  )
+  movies: Movie[];
 }

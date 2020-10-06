@@ -20,6 +20,9 @@ export class Episode {
   @CreateDateColumn()
   createdAt: Date;
 
+  @Column({ default: '?' })
+  duration: string;
+
   @OneToMany(
     type => EpisodeLink,
     links => links.episode,

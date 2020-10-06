@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnimeModule } from './modules/anime/anime.module';
 import { EpisodeModule } from './modules/episode/episode.module';
+import { MovieModule } from './modules/movie/movie.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { EpisodeModule } from './modules/episode/episode.module';
     }),
     AnimeModule,
     EpisodeModule,
+    MovieModule,
   ],
   controllers: [],
   providers: [],
