@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Episode } from './episode.entity';
 
 @Entity()
 export class Anime {
@@ -43,4 +50,13 @@ export class Anime {
 
   @Column({ default: 0 })
   favorites: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @OneToMany(
+    type => Episode,
+    episode => episode.anime,
+  )
+  episodes: Episode[];
 }
