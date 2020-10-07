@@ -39,6 +39,7 @@ export class MovieRepo {
           leftJoinAndSelect: {
             links: 'm.links',
             anime: 'm.anime',
+            categories: 'm.categories',
           },
         },
       });
@@ -56,6 +57,7 @@ export class MovieRepo {
           leftJoinAndSelect: {
             links: 'm.links',
             anime: 'm.anime',
+            categories: 'm.categories',
           },
         },
       });
@@ -89,6 +91,20 @@ export class MovieRepo {
       const deleteResult = await this.db.delete(id);
       if (!deleteResult.affected) return { deleted: false };
       return { deleted: true };
+    } catch (e) {
+      throw new SqlException(e);
+    }
+  }
+
+  async findByCategory(category: string, order: string): Promise<Movie[]> {
+    try {
+      const animes: Movie[] = await this.db
+        .createQueryBuilder('movie')
+        .leftJoinAndSelect('movie.categories', 'c')
+        .where('c.id=:category', { category })
+        .orderBy(order, 'ASC')
+        .getMany();
+      return animes;
     } catch (e) {
       throw new SqlException(e);
     }

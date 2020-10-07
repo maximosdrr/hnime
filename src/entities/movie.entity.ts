@@ -1,11 +1,15 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Anime } from './anime.entity';
+import { Category } from './category.entity';
 import { MovieLink } from './movie-link.entity';
 
 @Entity()
@@ -46,6 +50,9 @@ export class Movie {
   @Column({ default: 0 })
   favorites: number;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
   @OneToMany(
     type => MovieLink,
     links => links.movie,
@@ -57,4 +64,8 @@ export class Movie {
     anime => anime.movies,
   )
   anime: Anime;
+
+  @ManyToMany(type => Category)
+  @JoinTable()
+  categories: Category[];
 }

@@ -33,6 +33,12 @@ export class AnimeRepo {
         skip: page,
         where: whereOptions,
         order: orderOptions,
+        join: {
+          alias: 'a',
+          leftJoinAndSelect: {
+            categories: 'a.categories',
+          },
+        },
       });
       return animes;
     } catch (e) {
@@ -42,7 +48,14 @@ export class AnimeRepo {
 
   async findOneById(id: string): Promise<Anime> {
     try {
-      const anime = await this.db.findOne(id);
+      const anime = await this.db.findOne(id, {
+        join: {
+          alias: 'a',
+          leftJoinAndSelect: {
+            categories: 'a.categories',
+          },
+        },
+      });
       if (!anime) throw new NotFoundException('anime');
       return anime;
     } catch (e) {
@@ -93,6 +106,20 @@ export class AnimeRepo {
       if (!animeToUpdate) throw new NotFoundException('anime');
       animeToUpdate.numberOfMovies = animeToUpdate.numberOfMovies + value;
       return await this.db.save(animeToUpdate);
+    } catch (e) {
+      throw new SqlException(e);
+    }
+  }
+
+  async findByCategory(category: string, order: string): Promise<Anime[]> {
+    try {
+      const animes: Anime[] = await this.db
+        .createQueryBuilder('anime')
+        .leftJoinAndSelect('anime.categories', 'c')
+        .where('c.id=:category', { category })
+        .orderBy(order, 'ASC')
+        .getMany();
+      return animes;
     } catch (e) {
       throw new SqlException(e);
     }

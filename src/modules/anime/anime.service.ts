@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Anime } from 'src/entities/anime.entity';
+import { Category } from 'src/entities/category.entity';
 import { pageCalculation } from 'src/features/calculations/page-calculation';
 import { DeleteResult } from 'src/interfaces/delete-result';
 import { OrderByCondition, WhereExpression } from 'typeorm';
@@ -43,5 +44,23 @@ export class AnimeService {
   async updateNumberOfMovies(id: string, decrement: boolean): Promise<Anime> {
     const value = !decrement ? 1 : -1;
     return this.animeRepo.updateNumberOfMovies(id, value);
+  }
+
+  async putCategory(id: string, category: Category): Promise<Anime> {
+    const animeToAddCategory = await this.findOneById(id);
+    animeToAddCategory.categories.push(category);
+    return this.animeRepo.update(animeToAddCategory);
+  }
+
+  async deleteCategory(id: string, category: Category): Promise<Anime> {
+    const animeToDeleteCategory = await this.findOneById(id);
+    animeToDeleteCategory.categories = animeToDeleteCategory.categories.filter(
+      value => category.id != value.id,
+    );
+    return this.animeRepo.update(animeToDeleteCategory);
+  }
+
+  async findByCategory(category: string, order: string): Promise<Anime[]> {
+    return this.animeRepo.findByCategory(category, order || 'anime.name');
   }
 }

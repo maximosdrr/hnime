@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Category } from 'src/entities/category.entity';
 import { MovieLink } from 'src/entities/movie-link.entity';
 import { Movie } from 'src/entities/movie.entity';
 import { pageCalculation } from 'src/features/calculations/page-calculation';
@@ -50,5 +51,23 @@ export class MovieService {
 
   deleteLink(id: string): Promise<DeleteResult> {
     return this.movieLinkRepo.delete(id);
+  }
+
+  async putCategory(id: string, category: Category): Promise<Movie> {
+    const movieToAddCategory = await this.findOneById(id);
+    movieToAddCategory.categories.push(category);
+    return this.movieRepo.update(movieToAddCategory);
+  }
+
+  async deleteCategory(id: string, category: Category): Promise<Movie> {
+    const movieToDeleteCategory = await this.findOneById(id);
+    movieToDeleteCategory.categories = movieToDeleteCategory.categories.filter(
+      value => category.id != value.id,
+    );
+    return this.movieRepo.update(movieToDeleteCategory);
+  }
+
+  findByCategory(category: string, order: string): Promise<Movie[]> {
+    return this.movieRepo.findByCategory(category, order || 'movie.title');
   }
 }

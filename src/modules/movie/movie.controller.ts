@@ -7,6 +7,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { Category } from 'src/entities/category.entity';
 import { MovieLink } from 'src/entities/movie-link.entity';
 import { Movie } from 'src/entities/movie.entity';
 import { DeleteResult } from 'src/interfaces/delete-result';
@@ -58,5 +59,29 @@ export class MovieController {
   @Delete('link/delete')
   deleteLink(@Query('id') id: string): Promise<DeleteResult> {
     return this.movieService.deleteLink(id);
+  }
+
+  @Put('put-category')
+  insertCategory(
+    @Query('animeId') id: string,
+    @Body() category: Category,
+  ): Promise<Movie> {
+    return this.movieService.putCategory(id, category);
+  }
+
+  @Put('delete-category')
+  deleteCategory(
+    @Query('animeId') id: string,
+    @Body() category: Category,
+  ): Promise<Movie> {
+    return this.movieService.deleteCategory(id, category);
+  }
+
+  @Get('find-by-category')
+  findByCategory(
+    @Query('category') category: string,
+    @Query('order') order: string,
+  ): Promise<Movie[]> {
+    return this.movieService.findByCategory(category, order);
   }
 }

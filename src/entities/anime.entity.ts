@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Category } from './category.entity';
 import { Episode } from './episode.entity';
 import { Movie } from './movie.entity';
 
@@ -66,4 +69,8 @@ export class Anime {
     movies => movies.anime,
   )
   movies: Movie[];
+
+  @ManyToMany(type => Category)
+  @JoinTable()
+  categories: Category[];
 }
