@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnimeModule } from './modules/anime/anime.module';
 import { EpisodeModule } from './modules/episode/episode.module';
 import { MovieModule } from './modules/movie/movie.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { MovieModule } from './modules/movie/movie.module';
     AnimeModule,
     EpisodeModule,
     MovieModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],
