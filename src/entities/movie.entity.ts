@@ -25,7 +25,9 @@ export class Movie {
 
   @Column({ default: false })
   subtitled: boolean;
-
+    
+  @Column({default: 'https://fatosdesconhecidos.com.br/wp-content/uploads/2019/11/naruto-4.jpg'})
+  image: string;
   @Column({ default: false })
   dubbed: boolean;
 
