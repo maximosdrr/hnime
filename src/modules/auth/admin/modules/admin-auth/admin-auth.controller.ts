@@ -4,24 +4,23 @@ import { AdminAuthService } from './admin-auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
-@Controller('auth')
+@Controller('auth/admin')
 export class AdminAuthController {
   constructor(private readonly authService: AdminAuthService) {}
 
   @UseGuards(LocalAuthGuard)
-  @Post('admin/login')
+  @Post('login')
   async login(@Req() req) {
-    console.log(req.user);
     return this.authService.login(req.user);
   }
 
-  @Post('admin/insert')
+  @Post('insert')
   async createAdmin(@Body() admin: Admin): Promise<Admin> {
     return this.authService.createAdmin(admin);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('admin/profile')
+  @Get('profile')
   getProfile(@Req() req) {
     return req.user;
   }

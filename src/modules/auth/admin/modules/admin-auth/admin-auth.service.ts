@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { Admin } from 'src/entities/admin.entity';
-import { AdminService } from '../admin/admin.service';
+import { AdminService } from '../../admin.service';
 
 @Injectable()
 export class AdminAuthService {
