@@ -43,6 +43,9 @@ export class Anime {
   @Column({ default: 'Autor não informado' })
   author: string;
 
+  @Column({default: 'https://fatosdesconhecidos.com.br/wp-content/uploads/2019/11/naruto-4.jpg'})
+  image: string;
+
   // @Column({ default: 'Estudio não informado' })
   // studio: string;
 

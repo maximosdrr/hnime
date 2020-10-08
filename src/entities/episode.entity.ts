@@ -23,6 +23,9 @@ export class Episode {
   @Column({ default: '?' })
   duration: string;
 
+  @Column({default: 'https://fatosdesconhecidos.com.br/wp-content/uploads/2019/11/naruto-4.jpg'})
+  image: string;
+
   @OneToMany(
     type => EpisodeLink,
     links => links.episode,
