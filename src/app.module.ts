@@ -5,9 +5,8 @@ import { AnimeModule } from './modules/anime/anime.module';
 import { EpisodeModule } from './modules/episode/episode.module';
 import { MovieModule } from './modules/movie/movie.module';
 import { CategoryModule } from './modules/category/category.module';
-import { AdminAuthModule } from './modules/auth/admin/modules/admin-auth/admin-auth.module';
-import { AdminModule } from './modules/auth/admin/admin.module';
-import { UserModule } from './modules/auth/user/user.module';
+import { AdminAuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -30,7 +29,6 @@ import { UserModule } from './modules/auth/user/user.module';
     MovieModule,
     CategoryModule,
     AdminAuthModule,
-    AdminModule,
     UserModule,
   ],
   controllers: [],

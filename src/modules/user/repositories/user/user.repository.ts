@@ -1,20 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Admin } from 'src/entities/admin.entity';
+import { User } from 'src/entities/user.entity';
 import { SqlException } from 'src/features/exceptions/sql.exception';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class AdminRepo {
-  constructor(
-    @InjectRepository(Admin) private readonly db: Repository<Admin>,
-  ) {}
+export class UserRepo {
+  constructor(@InjectRepository(User) private readonly db: Repository<User>) {}
 
-  async insert(admin: Admin): Promise<Admin> {
+  async insert(user: User): Promise<User> {
     try {
-      const insertResult = await this.db.insert(admin);
-      admin.id = insertResult.identifiers[0].id;
-      return admin;
+      const insertResult = await this.db.insert(user);
+      user.id = insertResult.identifiers[0].id;
+      return user;
     } catch (e) {
       throw new SqlException(e);
     }
@@ -23,15 +21,15 @@ export class AdminRepo {
   async loginWithUsernameAndPassword(
     username: string,
     password: string,
-  ): Promise<Admin> {
+  ): Promise<User> {
     try {
-      const admin = await this.db.findOne({
+      const user = await this.db.findOne({
         where: {
           username,
           password,
         },
       });
-      return admin;
+      return user;
     } catch (e) {
       throw new SqlException(e);
     }
