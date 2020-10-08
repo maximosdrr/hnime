@@ -5,6 +5,8 @@ import { AnimeModule } from './modules/anime/anime.module';
 import { EpisodeModule } from './modules/episode/episode.module';
 import { MovieModule } from './modules/movie/movie.module';
 import { CategoryModule } from './modules/category/category.module';
+import { AdminAuthModule } from './modules/admin-auth/admin-auth.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { CategoryModule } from './modules/category/category.module';
     EpisodeModule,
     MovieModule,
     CategoryModule,
+    AdminAuthModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],

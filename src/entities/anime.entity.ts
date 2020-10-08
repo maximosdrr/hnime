@@ -14,13 +14,13 @@ import { Movie } from './movie.entity';
 @Entity()
 export class Anime {
   @PrimaryGeneratedColumn('uuid')
-  id?: string;
+  id: string;
 
   @Column({ nullable: false })
   name: string;
 
   @Column({ default: 'Esse anime ainda não possui descrição' })
-  description?: string;
+  description: string;
 
   @Column({ nullable: false })
   initialLetter: string;
@@ -43,17 +43,17 @@ export class Anime {
   @Column({ default: 'Autor não informado' })
   author: string;
 
-  @Column({ default: 'Estudio não informado' })
-  studio: string;
+  // @Column({ default: 'Estudio não informado' })
+  // studio: string;
 
-  @Column({ default: 0 })
-  likes: number;
+  // @Column({ default: 0 })
+  // likes: number;
 
-  @Column({ default: 0 })
-  deslikes: number;
+  // @Column({ default: 0 })
+  // deslikes: number;
 
-  @Column({ default: 0 })
-  favorites: number;
+  // @Column({ default: 0 })
+  // favorites: number;
 
   @CreateDateColumn()
   createdAt: Date;

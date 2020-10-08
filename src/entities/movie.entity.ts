@@ -35,20 +35,20 @@ export class Movie {
   @Column({ default: 'Autor não informado' })
   author: string;
 
-  @Column({ default: 'Estudio não informado' })
-  studio: string;
+  // @Column({ default: 'Estudio não informado' })
+  // studio: string;
 
   @Column({ default: 'Descrição não informada' })
   description: string;
 
-  @Column({ default: 0 })
-  likes: number;
+  // @Column({ default: 0 })
+  // likes: number;
 
-  @Column({ default: 0 })
-  deslikes: number;
+  // @Column({ default: 0 })
+  // deslikes: number;
 
-  @Column({ default: 0 })
-  favorites: number;
+  // @Column({ default: 0 })
+  // favorites: number;
 
   @CreateDateColumn()
   createdAt: Date;
